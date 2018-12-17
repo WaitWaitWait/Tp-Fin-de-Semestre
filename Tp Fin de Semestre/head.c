@@ -30,5 +30,26 @@ void InitPlateau(hole * Plateau)
 void AffichPlateau(hole * Plateau)
 {
 
-	
+	int a;
+
+	printf("|");
+
+	for (a = 0; a < 6; a++)
+	{
+
+		printf(" %d |", Plateau[a].NbCailloux);
+
+	}
+
+	printf("\n|");
+
+	for (a = 6; a < 12; a++)
+	{
+
+		printf(" %d |", Plateau[a].NbCailloux);
+
+	}
+
+	printf("\n");
+	return;
 }

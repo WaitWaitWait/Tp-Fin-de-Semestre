@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <Windows.h>
 #include "head.h"
 
 int main()
@@ -7,7 +8,7 @@ int main()
 	hole Plateau[12];
 	hole * p_Plateau = NULL;
 
-	p_Plateau = &Plateau;
+	p_Plateau = Plateau;
 
 	if (!p_Plateau)
 	{
@@ -18,6 +19,9 @@ int main()
 	}
 
 	InitPlateau(p_Plateau);
+	AffichPlateau(p_Plateau);
+
+	system("PAUSE");
 
 	return EXIT_SUCCESS;
 }
