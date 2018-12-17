@@ -24,5 +24,6 @@ void AffichPlateau(hole * Plateau);
 
 void Play(hole * Plateau, int player);
 
+void recup_graines(int joueur, hole * Plateau, int case_actuelle);
 #endif 
 

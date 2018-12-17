@@ -27,23 +27,23 @@ void InitPlateau(hole * Plateau)
 	return;
 }
 
-void recup_graines(joueur, Plateau)
+void recup_cailloux(int joueur, hole * Plateau, int case_actuelle)
 {
 
-	if (1 < Plateau[actuel] < 4 && hole.camps =! joueuractuel)
+	if (Plateau->camps != joueur)
 	{
-		score[joueur] += Plateau[actuel];
-
-		while (Plateau[actuel-1])
+		if (1 < Plateau->NbCailloux < 4)
 		{
-			score[joueur] += Plateau[actuel - 1];
+			score[joueur] += Plateau[actuel];
+
+				while (Plateau[actuel - 1])
+				{
+					score[joueur] += Plateau[actuel - 1];
+				}
 		}
 	}
 
-	else
-	{
-		tour(joueur2);
-	}
+	return;
 
 }
 
