@@ -1,5 +1,5 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef _HEAD_H_
+#define _HEAD_H_
 
 typedef struct cases
 {
