@@ -27,6 +27,25 @@ void InitPlateau(hole * Plateau)
 	return;
 }
 
+void recup_graines(joueur, Plateau)
+{
+
+	if (1 < Plateau[actuel] < 4)
+	{
+		score[joueur] += Plateau[actuel];
+
+		while (Plateau[actuel-1])
+		{
+			score[joueur] += Plateau[actuel - 1];
+		}
+	}
+	else
+	{
+		tour(joueur2);
+	}
+
+}
+
 void AffichPlateau(hole * Plateau)
 {
 
