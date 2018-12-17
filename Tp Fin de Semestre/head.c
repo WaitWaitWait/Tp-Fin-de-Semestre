@@ -29,31 +29,6 @@ void InitPlateau(hole * Plateau)
 	return;
 }
 
-void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
-{
-	
-	if (Plateau[ActualCase].camps != player)
-	{
-		if (1 < Plateau[ActualCase].NbCailloux < 4)
-		{
-
-			Score[player] += Plateau[ActualCase].NbCailloux;
-			Plateau[ActualCase].NbCailloux = 0;
-
-		}
-	}
-	
-	if (1 < Plateau[ActualCase - 1].NbCailloux < 4 && ActualCase != 11 || ActualCase != 0)
-	{
-
-		RecupCailloux(player, Plateau, ActualCase - 1, Score);
-
-	}
-
-	return;
-
-}
-
 void AffichPlateau(hole * Plateau)
 {
 
@@ -81,18 +56,120 @@ void AffichPlateau(hole * Plateau)
 	return;
 }
 
-void Play(hole * Plateau, int player, int * Score)
+void PlaceCailloux(int player, hole * Plateau, int Choix, int NbCailloux)
 {
 
+	if (Choix = 0)
+		{
+
+			Choix = 6;
+			Plateau[Choix].NbCailloux++;
+			NbCailloux--;
+			if (NbCailloux != 0)
+			{
+				PlaceCailloux(player, Plateau, Choix, NbCailloux);
+			}
+
+		}
+
+	if (Choix = 11)
+		{
+
+			Choix = 5;
+			Plateau[Choix].NbCailloux++;
+			NbCailloux--;
+			if (NbCailloux != 0)
+			{
+				PlaceCailloux(player, Plateau, Choix, NbCailloux);
+			}
+
+		}
+
+	if (0 < Choix < 6)
+		{
+
+			Choix--;
+			Plateau[Choix].NbCailloux++;
+			NbCailloux--;
+			if (NbCailloux != 0)
+			{
+				PlaceCailloux(player, Plateau, Choix, NbCailloux);
+			}
+
+		}
+
+	if (5 < Choix < 11)
+		{
+
+			Choix++;
+			Plateau[Choix].NbCailloux++;
+			NbCailloux--;
+			if (NbCailloux != 0)
+			{
+				PlaceCailloux(player, Plateau, Choix, NbCailloux);
+			}
+
+		}
+	return;
+}
+
+void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
+{
+
+	if (Plateau[ActualCase].camps != player)
+	{
+		if (1 < Plateau[ActualCase].NbCailloux < 4)
+		{
+
+			Score[player] += Plateau[ActualCase].NbCailloux;
+			Plateau[ActualCase].NbCailloux = 0;
+
+		}
+	}
+
+	if (1 < Plateau[ActualCase - 1].NbCailloux < 4 && ActualCase != 11 || ActualCase != 0)
+	{
+
+		RecupCailloux(player, Plateau, ActualCase - 1, Score);
+
+	}
+
+	return;
+
+}
+
+void Play(hole * Plateau, int player, int * Score)
+{
+	AffichPlateau(Plateau);
 	player = 1 - player;
 	int choix = 0;
 	
-	if (choix < 1 || choix > 6)
+	while (choix < 1 || choix > 6)
 	{
 		printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
 		scanf("%d", &choix);
 
 	}
 
+	if (player = 0)
+	{
+
+		choix--;
+
+	}
+
+	else
+	{
+
+		choix += 5;
+
+	}
+
+	int NbCailloux = Plateau[choix].NbCailloux;
+	Plateau[choix].NbCailloux = 0;
+	Plateau[choix].start = 1;
+
+	PlaceCailloux(player, Plateau, choix, NbCailloux);
+	Play(Plateau, player, Score);
 
 }

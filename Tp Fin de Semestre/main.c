@@ -26,7 +26,6 @@ int main()
 	}
 
 	InitPlateau(p_Plateau);
-	AffichPlateau(p_Plateau);
 	Play(p_Plateau, StartPlayer, p_Score);
 
 
