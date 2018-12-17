@@ -5,6 +5,7 @@
 
 int main()
 {
+	int StartPlayer = rand() % 2;
 	hole Plateau[12];
 	hole * p_Plateau = NULL;
 
@@ -20,6 +21,8 @@ int main()
 
 	InitPlateau(p_Plateau);
 	AffichPlateau(p_Plateau);
+	Play(p_Plateau, StartPlayer);
+
 
 	system("PAUSE");
 

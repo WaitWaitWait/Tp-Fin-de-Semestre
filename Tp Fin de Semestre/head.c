@@ -5,7 +5,7 @@
 void InitPlateau(hole * Plateau)
 {
 
-	int a, b;
+	int a;
 
 	for (a = 0; a < 12; a++)
 	{
@@ -15,12 +15,12 @@ void InitPlateau(hole * Plateau)
 
 			if (a < 6)
 			{
-				Plateau[a].camps = 1;
+				Plateau[a].camps = 0;
 			}
 
 			else
 			{
-				Plateau[a].camps = 2;
+				Plateau[a].camps = 1;
 			}
 
 	}
@@ -52,4 +52,20 @@ void AffichPlateau(hole * Plateau)
 
 	printf("\n");
 	return;
+}
+
+void Play(hole * Plateau, int player)
+{
+
+	player = 1 - player;
+	int choix = 0;
+	
+	if (choix < 1 || choix > 6)
+	{
+		printf("Joueur %d+1, choix de la case (entre 1 et 6) :\n");
+		scanf("%d", &choix);
+
+	}
+
+
 }
