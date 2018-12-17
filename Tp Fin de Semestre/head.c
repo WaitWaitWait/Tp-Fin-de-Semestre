@@ -26,3 +26,9 @@ void InitPlateau(hole * Plateau)
 	}
 	return;
 }
+
+void AffichPlateau(hole * Plateau)
+{
+
+	
+}

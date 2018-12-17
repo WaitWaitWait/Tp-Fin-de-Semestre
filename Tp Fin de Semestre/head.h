@@ -12,5 +12,7 @@ typedef struct hole_s
 
 void InitPlateau(hole * Plateau);
 
+void AffichPlateau(hole * Plateau);
+
 #endif 
 
