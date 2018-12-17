@@ -27,18 +27,20 @@ void InitPlateau(hole * Plateau)
 	return;
 }
 
-void recup_cailloux(int joueur, hole * Plateau, int case_actuelle)
+void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 {
-
-	if (Plateau->camps != joueur)
+	
+	if (Plateau[ActualCase].camps != player)
 	{
-		if (1 < Plateau->NbCailloux < 4)
+		if (1 < Plateau[ActualCase].NbCailloux < 4)
 		{
-			score[joueur] += Plateau[actuel];
+			Score[player] += Plateau[ActualCase].NbCailloux;
+			Plateau[ActualCase].NbCailloux = 0;
 
-				while (Plateau[actuel - 1])
+				while (Plateau[ActualCase - 1])
 				{
-					score[joueur] += Plateau[actuel - 1];
+					Score[player] += Plateau[ActualCase - 1].NbCailloux;
+					Plateau[ActualCase - 1].NbCailloux = 0;
 				}
 		}
 	}
@@ -74,7 +76,7 @@ void AffichPlateau(hole * Plateau)
 	return;
 }
 
-void Play(hole * Plateau, int player)
+void Play(hole * Plateau, int player, int * Score)
 {
 
 	player = 1 - player;

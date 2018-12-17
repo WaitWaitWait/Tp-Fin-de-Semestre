@@ -10,19 +10,11 @@ typedef struct hole_s
 
 }hole;
 
-typedef struct score_s
-{
-
-	int P1;
-	int P2;
-
-}score;
-
 void InitPlateau(hole * Plateau);
 
 void AffichPlateau(hole * Plateau);
 
-void Play(hole * Plateau, int player);
+void Play(hole * Plateau, int player, int * Score);
 
 void recup_graines(int joueur, hole * Plateau, int case_actuelle);
 #endif 

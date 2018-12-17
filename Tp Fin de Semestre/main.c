@@ -6,10 +6,14 @@
 int main()
 {
 	int StartPlayer = rand() % 2;
+	int Score[2];
 	hole Plateau[12];
+
 	hole * p_Plateau = NULL;
+	int * p_Score = NULL;
 
 	p_Plateau = Plateau;
+	p_Score = 
 
 	if (!p_Plateau)
 	{
@@ -21,10 +25,11 @@ int main()
 
 	InitPlateau(p_Plateau);
 	AffichPlateau(p_Plateau);
-	Play(p_Plateau, StartPlayer);
+	Play(p_Plateau, StartPlayer, p_Score);
 
 
 	system("PAUSE");
 
 	return EXIT_SUCCESS;
 }
+
