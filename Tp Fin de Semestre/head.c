@@ -34,15 +34,18 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 	{
 		if (1 < Plateau[ActualCase].NbCailloux < 4)
 		{
+
 			Score[player] += Plateau[ActualCase].NbCailloux;
 			Plateau[ActualCase].NbCailloux = 0;
 
-				while (Plateau[ActualCase - 1])
-				{
-					Score[player] += Plateau[ActualCase - 1].NbCailloux;
-					Plateau[ActualCase - 1].NbCailloux = 0;
-				}
 		}
+	}
+	
+	if (1 < Plateau[ActualCase - 1].NbCailloux < 4 && ActualCase != 11 || ActualCase != 0)
+	{
+
+		RecupCailloux(player, Plateau, ActualCase - 1, Score);
+
 	}
 
 	return;
