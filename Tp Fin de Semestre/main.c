@@ -3,6 +3,8 @@
 #include <Windows.h>
 #include "head.h"
 
+#define _CRT_SECURE_NO_WARNINGS
+
 int main()
 {
 	int StartPlayer = rand() % 2;
@@ -13,7 +15,7 @@ int main()
 	int * p_Score = NULL;
 
 	p_Plateau = Plateau;
-	p_Score = 
+	p_Score = Score;
 
 	if (!p_Plateau)
 	{

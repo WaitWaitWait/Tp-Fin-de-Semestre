@@ -1,6 +1,7 @@
 #ifndef _HEAD_H_
 #define _HEAD_H_
 
+
 typedef struct hole_s
 {
 	
@@ -16,6 +17,6 @@ void AffichPlateau(hole * Plateau);
 
 void Play(hole * Plateau, int player, int * Score);
 
-void recup_graines(int joueur, hole * Plateau, int case_actuelle);
-#endif 
+void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score);
 
+#endif;

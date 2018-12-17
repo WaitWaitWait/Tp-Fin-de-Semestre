@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "head.h"
 
+
 void InitPlateau(hole * Plateau)
 {
 
@@ -87,7 +88,7 @@ void Play(hole * Plateau, int player, int * Score)
 	
 	if (choix < 1 || choix > 6)
 	{
-		printf("Joueur %d+1, choix de la case (entre 1 et 6) :\n");
+		printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
 		scanf("%d", &choix);
 
 	}
