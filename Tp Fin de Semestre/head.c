@@ -30,7 +30,7 @@ void InitPlateau(hole * Plateau)
 void recup_graines(joueur, Plateau)
 {
 
-	if (1 < Plateau[actuel] < 4)
+	if (1 < Plateau[actuel] < 4 && hole.camps =! joueuractuel)
 	{
 		score[joueur] += Plateau[actuel];
 
@@ -39,6 +39,7 @@ void recup_graines(joueur, Plateau)
 			score[joueur] += Plateau[actuel - 1];
 		}
 	}
+
 	else
 	{
 		tour(joueur2);
