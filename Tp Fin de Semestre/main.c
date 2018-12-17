@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "head.h"
 
-#define _CRT_SECURE_NO_WARNINGS
+
 
 int main()
 {
@@ -17,10 +17,10 @@ int main()
 	p_Plateau = Plateau;
 	p_Score = Score;
 
-	if (!p_Plateau)
+	if (!p_Plateau || !p_Score)
 	{
 
-		printf("Erreur d'initialisation Pointeur Plateau");
+		printf("Erreur d'initialisation Pointeur");
 		return EXIT_FAILURE;
 
 	}
