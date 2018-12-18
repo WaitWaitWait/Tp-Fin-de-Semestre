@@ -1,4 +1,3 @@
-
 int IaMin(int) 
 {
 	
