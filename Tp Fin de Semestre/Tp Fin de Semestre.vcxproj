@@ -116,7 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="head.c" />
-    <ClCompile Include="IA.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
