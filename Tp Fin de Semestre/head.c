@@ -101,16 +101,16 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 
 }
 
-void PlaceCailloux(int player, hole * Plateau, int choix, int * NbCailloux)
+void PlaceCailloux(int player, hole * Plateau, int choix, int  NbCailloux)
 {
 
-	if (*NbCailloux > 0)
+	if (NbCailloux > 0)
 	{
 		if (Plateau[choix].start != 1)
 		{
 
 			Plateau[choix].NbCailloux++;
-			*NbCailloux--;
+			NbCailloux--;
 			choix = Plateau[choix].next;
 
 			PlaceCailloux(player, Plateau, choix, NbCailloux);
@@ -133,9 +133,6 @@ void Play(hole * Plateau, int player, int * Score)
 
 	int choix = 0;
 	int NbCailloux = 0;
-
-	int * p_NbCailloux = NULL;
-	p_NbCailloux = &NbCailloux;
 	
 	printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
 	scanf("%d", &choix);
@@ -167,7 +164,7 @@ void Play(hole * Plateau, int player, int * Score)
 	Plateau[choix].start = 1;
 	choix = Plateau[choix].next;
 
-	PlaceCailloux(player, Plateau, choix, p_NbCailloux);
+	PlaceCailloux(player, Plateau, choix, NbCailloux);
 	AffichPlateau(Plateau);
 	Play(Plateau, 1 - player, Score);
 }

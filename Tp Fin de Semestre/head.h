@@ -16,7 +16,7 @@ void InitPlateau(hole * Plateau);
 
 void AffichPlateau(hole * Plateau);
 
-void PlaceCailloux(int player, hole * Plateau, int choix, int * NbCailloux);
+void PlaceCailloux(int player, hole * Plateau, int choix, int NbCailloux);
 
 void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score);
 
