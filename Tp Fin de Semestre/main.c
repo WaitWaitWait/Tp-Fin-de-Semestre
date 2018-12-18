@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <Windows.h>
 #include "head.h"
+#include "IA.h"
 
 
 
@@ -27,8 +28,12 @@ int main()
 
 	InitPlateau(p_Plateau);
 	AffichPlateau(p_Plateau,p_Score);
+	
+	
+
 	Play(p_Plateau, StartPlayer, p_Score);
 
+	Arbre A = {'A' , cons(&B, cons(C&))}
 
 	system("PAUSE");
 

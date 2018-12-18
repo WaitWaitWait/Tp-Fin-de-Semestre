@@ -1,77 +1,42 @@
-int IaMin(int) 
-{
-	
-	if (ProfTab == 0 || fin du jeu)
-	{
-		eval(etat_du_jeu) //eval est la fonction qui compare le min max et fait son choix
-	}
+typedef struct node {
+	//char * type;
+	char * label;
+	struct node * prev;
+	size_t nb_elem;
+	struct node * filsNodes[nb_elem];
+	int x, y; //coordonnées pour l'affichage
+	int bool;
+} node;
 
-	int ValMin = 1000000; //IaMin et IaMax deux nombre tres eloigné pourfaciliter la comparaison eval
+typedef struct {
+	node * root;
+} arbre;
 
-	for (tous les coups possibles)
-	{
-		simuler(coup_actuel);
-
-		int val  = IaMax(etat_du_jeu, profondeur - 1); //on regarde ce qui est le plus grand la profondeur on l et
-
-		if (val  < ValMin )
-		{
-			ValMin = val;
-		}
-
-		AnnulerCoup(coup_actuel);
-	}
-
-	return ValMin;
+void Init(arbre *l) {
+	l->root = NULL;
 }
 
-
-int IaMax(int) 
-{
-	if (ProfTab == 0 || fin du jeu)
-	{
-		eval(etat_du_jeu) //eval est la fonction qui compare le min max et fait son choix
+void addBranch(arbre *l, char * nlabel, struct node * chicos,
+	int bool, size_t nbelem, int number) {
+	node *nouv = malloc(sizeof(node));
+	if (!nouv)
+		exit(EXIT_FAILURE);
+	//Les Values
+	nouv->label = nlabel;
+	//Le Pere est la partie qui semble douteuse
+	if (l->root == NULL) {
+		nouv->prev = l->root;
 	}
-
-	int ValMax = -1000000; //IaMin et IaMax deux nombre tres eloigné pour faciliter la comparaison eval
-
-	for (tous les coups possibles)
-	{
-		simuler(coup_actuel);
-
-			int val  = Min(etat_du_jeu, profondeur - 1); //on regarde ce qui est le plus grand la profondeur on l et
-
-		if (val  > ValMax)
-		{
-			ValMax = val;
-		}
-
-		AnnulerCoup(coup_actuel);
+	else {
+		nouv->prev = nouv->filsNodes[number];
 	}
-	return ValMax;
-}
-
-void IaQuiJoue()
-{
-	int ValMax = -1000000;
-	
-	for (tous les coups possibles)
-	{
-		simuler(coup_actuel);
-
-		val  = IaMin(etat_du_jeu, profondeur);
-
-		if (val  > ValMax)
-		{
-			max_val  = val;
-			meilleur_coup  = coup_actuel;
-		}
-
-		if (val > ValMax)
-		{
-			annuler_coup(coup_actuel);
-
-		}
+	//Les Enfants
+	if (bool == 0) {
+		//Cas Enum Value
+		nouv->filsNodes = NULL;
 	}
-	jouer(meilleur_coup)
+	else {
+		//Cas Structure Message
+		nouv->filsNodes = *chicos[nbelem];
+	}
 }
