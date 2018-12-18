@@ -44,12 +44,27 @@ void InitPlateau(hole * Plateau)
 	Plateau[11].next = 5;
 	Plateau[0].next = 6;
 
+	for (a = 0; a < 5; a++)
+	{
 
+		Plateau[a].previous = a + 1;
+
+	}
+
+	for (a = 11; a > 6; a--)
+	{
+
+		Plateau[a].previous = a - 1;
+
+	}
+
+	Plateau[6].previous = 0;
+	Plateau[5].previous = 11;
 
 	return;
 }
 
-void AffichPlateau(hole * Plateau)
+void AffichPlateau(hole * Plateau, int * Score)
 {
 
 	int a;
@@ -63,6 +78,7 @@ void AffichPlateau(hole * Plateau)
 
 	}
 
+	printf("     P1 : %d", Score[0]);
 	printf("\n|");
 
 	for (a = 6; a < 12; a++)
@@ -72,14 +88,15 @@ void AffichPlateau(hole * Plateau)
 
 	}
 
-
+	printf("     P2 : %d", Score[1]);
 	printf("\n");
 	return;
 }
 
 void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 {
-	
+	ActualCase = Plateau[ActualCase].previous;
+
 	if (Plateau[ActualCase].camps != player)
 	{
 		if (1 < Plateau[ActualCase].NbCailloux < 4)
@@ -88,21 +105,17 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 			Score[player] += Plateau[ActualCase].NbCailloux;
 			Plateau[ActualCase].NbCailloux = 0;
 
+			RecupCailloux(player, Plateau, ActualCase, Score);
+
 		}
+
 	}
 	
-	if (1 < Plateau[ActualCase - 1].NbCailloux < 4 && ActualCase != 11 || ActualCase != 0)
-	{
-
-		RecupCailloux(player, Plateau, ActualCase - 1, Score);
-
-	}
-
 	return;
 
 }
 
-void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
+int PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
 {
 
 	if (NbCailloux > 0)
@@ -128,7 +141,7 @@ void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
 
 	Plateau[CaseDepart].start = 0;
 
-	return;
+	return choix;
 }
 
 void Play(hole * Plateau, int player, int * Score)
@@ -137,6 +150,7 @@ void Play(hole * Plateau, int player, int * Score)
 	int choix = 0;
 	int NbCailloux = 0;
 	int CaseDepart;
+	int ActualCase;
 	
 	printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
 	scanf("%d", &choix);
@@ -169,7 +183,13 @@ void Play(hole * Plateau, int player, int * Score)
 	Plateau[choix].start = 1;
 	choix = Plateau[choix].next;
 
-	PlaceCailloux(CaseDepart, Plateau, choix, NbCailloux);
-	AffichPlateau(Plateau);
+	ActualCase = PlaceCailloux(CaseDepart, Plateau, choix, NbCailloux);
+	AffichPlateau(Plateau, Score);
+
+	system("PAUSE");
+
+	RecupCailloux(player, Plateau, ActualCase, Score);
+	AffichPlateau(Plateau, Score);
+
 	Play(Plateau, 1 - player, Score);
 }

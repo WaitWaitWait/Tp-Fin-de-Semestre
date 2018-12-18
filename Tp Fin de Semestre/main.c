@@ -8,7 +8,7 @@
 int main()
 {
 	int StartPlayer = rand() % 2;
-	int Score[2];
+	int Score[2] = { 0,0 };
 	hole Plateau[12];
 
 	hole * p_Plateau = NULL;
@@ -26,7 +26,7 @@ int main()
 	}
 
 	InitPlateau(p_Plateau);
-	AffichPlateau(p_Plateau);
+	AffichPlateau(p_Plateau,p_Score);
 	Play(p_Plateau, StartPlayer, p_Score);
 
 

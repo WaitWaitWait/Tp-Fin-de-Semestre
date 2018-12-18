@@ -8,15 +8,16 @@ typedef struct hole_s
 	int NbCailloux;
 	int camps;
 	int start;
+	int previous;
 	int next;
 
 }hole;
 
 void InitPlateau(hole * Plateau);
 
-void AffichPlateau(hole * Plateau);
+void AffichPlateau(hole * Plateau, int * Score);
 
-void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int NbCailloux);
+int PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int NbCailloux);
 
 void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score);
 
