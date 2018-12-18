@@ -17,9 +17,11 @@ void InitPlateau(hole * Plateau);
 
 void AffichPlateau(hole * Plateau, int * Score);
 
-int PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int NbCailloux);
+void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int NbCailloux);
 
 void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score);
+
+int Affamer(int player, hole * Plateau);
 
 void Play(hole * Plateau, int player, int * Score);
 

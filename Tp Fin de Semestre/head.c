@@ -95,27 +95,87 @@ void AffichPlateau(hole * Plateau, int * Score)
 
 void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 {
-	ActualCase = Plateau[ActualCase].previous;
+	int tmp, famine;
 
 	if (Plateau[ActualCase].camps != player)
 	{
-		if (1 < Plateau[ActualCase].NbCailloux < 4)
+		if (Plateau[ActualCase].NbCailloux > 1 && Plateau[ActualCase].NbCailloux < 4)
 		{
 
 			Score[player] += Plateau[ActualCase].NbCailloux;
+			tmp = Plateau[ActualCase].NbCailloux;
 			Plateau[ActualCase].NbCailloux = 0;
 
-			RecupCailloux(player, Plateau, ActualCase, Score);
+			famine = Affamer(player, Plateau);
 
+			if (famine == 1)
+			{
+
+				Plateau[ActualCase].NbCailloux = tmp;
+
+			}
+
+			else
+			{
+
+				ActualCase = Plateau[ActualCase].previous;
+				RecupCailloux(player, Plateau, ActualCase, Score);
+
+			}
 		}
-
 	}
 	
 	return;
 
 }
 
-int PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
+int Affamer(int player, hole * Plateau)
+{
+	int famine = 0;
+	int somme = 0;
+	int a;
+
+	if (player == 0)
+	{
+
+		for (a = 6; a < 12; a++)
+		{
+
+			somme += Plateau[a].NbCailloux;
+
+		}
+
+		if (somme == 0)
+		{
+
+			famine = 1;
+
+		}
+	}
+
+	if (player == 1)
+	{
+
+		for (a = 0; a < 6; a++)
+		{
+
+			somme += Plateau[a].NbCailloux;
+
+		}
+
+		if (somme == 0)
+		{
+
+			famine = 1;
+
+		}
+	}
+
+	return famine;
+
+}
+
+void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
 {
 
 	if (NbCailloux > 0)
@@ -141,7 +201,7 @@ int PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
 
 	Plateau[CaseDepart].start = 0;
 
-	return choix;
+	return;
 }
 
 void Play(hole * Plateau, int player, int * Score)
@@ -151,6 +211,7 @@ void Play(hole * Plateau, int player, int * Score)
 	int NbCailloux = 0;
 	int CaseDepart;
 	int ActualCase;
+	int a;
 	
 	printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
 	scanf("%d", &choix);
@@ -160,8 +221,8 @@ void Play(hole * Plateau, int player, int * Score)
 
 		printf("Entre 1 et 6 stp ^-^'\n"); // ¯\_(ツ)_/¯
 		Play(Plateau, player, Score);
-	}
 
+	}
 	
 	if (player == 0)
 	{
@@ -177,16 +238,33 @@ void Play(hole * Plateau, int player, int * Score)
 
 	}
 
+	if (Plateau[choix].NbCailloux == 0)
+	{
+
+		printf("Une case non vide tu dois prendre !\n"); // ¯\_(ツ)_/¯
+		Play(Plateau, player, Score);
+
+	}
+
+
 	CaseDepart = choix;
+	ActualCase = choix;
 	NbCailloux = Plateau[choix].NbCailloux;
 	Plateau[choix].NbCailloux = 0;
 	Plateau[choix].start = 1;
 	choix = Plateau[choix].next;
 
-	ActualCase = PlaceCailloux(CaseDepart, Plateau, choix, NbCailloux);
+	PlaceCailloux(CaseDepart, Plateau, choix, NbCailloux);
 	AffichPlateau(Plateau, Score);
 
 	system("PAUSE");
+
+	for (a = 0; a < NbCailloux; a++)
+	{
+
+		ActualCase = Plateau[ActualCase].next;
+
+	}
 
 	RecupCailloux(player, Plateau, ActualCase, Score);
 	AffichPlateau(Plateau, Score);
