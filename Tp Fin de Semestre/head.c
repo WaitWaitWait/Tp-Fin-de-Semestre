@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <stdio.h>
 #include "head.h"
@@ -26,6 +26,53 @@ void InitPlateau(hole * Plateau)
 			}
 
 	}
+
+	for (a = 5; a > 0; a--)
+	{
+
+		Plateau[a].next = a - 1;
+
+	}
+
+	Plateau[0].next = 6;
+
+	for (a = 6; a < 11; a++)
+	{
+
+		Plateau[a].next = a + 1;
+
+	}
+
+	Plateau[11].next = 5;
+
+	return;
+}
+
+void AffichPlateau(hole * Plateau)
+{
+
+	int a;
+
+	printf("|");
+
+	for (a = 0; a < 6; a++)
+	{
+
+		printf(" %d |", Plateau[a].NbCailloux);
+
+	}
+
+	printf("\n|");
+
+	for (a = 6; a < 12; a++)
+	{
+
+		printf(" %d |", Plateau[a].NbCailloux);
+
+	}
+
+
+	printf("\n");
 	return;
 }
 
@@ -54,45 +101,73 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)
 
 }
 
-void AffichPlateau(hole * Plateau)
+void PlaceCailloux(int player, hole * Plateau, int choix, int * NbCailloux)
 {
 
-	int a;
-
-	printf("|");
-
-	for (a = 0; a < 6; a++)
+	if (*NbCailloux > 0)
 	{
+		if (Plateau[choix].start != 1)
+		{
 
-		printf(" %d |", Plateau[a].NbCailloux);
+			Plateau[choix].NbCailloux++;
+			*NbCailloux--;
+			choix = Plateau[choix].next;
 
+			PlaceCailloux(player, Plateau, choix, NbCailloux);
+
+		}
+
+		else
+		{
+
+			PlaceCailloux(player, Plateau, choix, NbCailloux);
+
+		}
 	}
 
-	printf("\n|");
-
-	for (a = 6; a < 12; a++)
-	{
-
-		printf(" %d |", Plateau[a].NbCailloux);
-
-	}
-
-	printf("\n");
 	return;
 }
 
 void Play(hole * Plateau, int player, int * Score)
 {
 
-	player = 1 - player;
 	int choix = 0;
+	int NbCailloux = 0;
+
+	int * p_NbCailloux = NULL;
+	p_NbCailloux = &NbCailloux;
 	
-	if (choix < 1 || choix > 6)
+	printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
+	scanf("%d", &choix);
+
+	if (choix < 0 || choix > 6)
 	{
-		printf("Joueur %d, choix de la case (entre 1 et 6) :\n", player + 1);
-		scanf("%d", &choix);
+
+		printf("Entre 1 et 6 stp ^-^'\n"); // ¯\_(ツ)_/¯
+		Play(Plateau, player, Score);
+	}
+
+	
+	if (player == 0)
+	{
+
+		choix--;
 
 	}
 
+	if (player == 1)
+	{
 
+		choix += 5;
+
+	}
+
+	NbCailloux = Plateau[choix].NbCailloux;
+	Plateau[choix].NbCailloux = 0;
+	Plateau[choix].start = 1;
+	choix = Plateau[choix].next;
+
+	PlaceCailloux(player, Plateau, choix, p_NbCailloux);
+	AffichPlateau(Plateau);
+	Play(Plateau, 1 - player, Score);
 }
