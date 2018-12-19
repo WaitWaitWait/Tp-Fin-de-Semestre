@@ -157,7 +157,109 @@ int IAChoix(hole * Plateau, TreeNode * Node, int * Score, int player, int Level)
 		{
 
 
+
 		}
 	}
 	return BestChoix;
 }
+
+int Max(hole * Plateau, int Depth)
+{
+
+	int max, i, tmp;
+	max = -99999;
+
+	if (Depth == 0)
+	{
+
+		printf("partie finie");
+		EXIT_FAILURE;
+
+	}
+
+	else 
+	{
+
+		for (i = 0; i < 6; i++)
+		{
+
+			GenererCoups(Plateau, 0, /*score*/12, abr );
+
+			if (Plateau > Depth - 1)
+			{
+
+				tmp = Plateau;
+
+			}
+			else
+			{
+
+				tmp = Depth - 1;
+
+			}
+
+			if (tmp > max)
+			{
+
+				max = tmp;
+
+			}
+
+		}
+
+	}
+
+	return max;
+}
+
+
+int Min(hole * Plateau, int Depth)
+{
+
+	int min, i, tmp;
+	min = 99999;
+
+	if (Depth == 0)
+	{
+
+		printf("partie finie");
+		return EXIT_FAILURE;
+
+	}
+
+	else
+	{
+
+		for (i = 0; i < 6; i++)
+		{
+
+			GenererCoups(Plateau, 0, /*Score*/ 12, abr);
+
+			if (Plateau < Depth - 1)
+			{
+
+				tmp = Plateau;
+
+			}
+			else
+			{
+
+				tmp = Depth - 1;
+
+			}
+
+			if (tmp < min)
+			{
+
+				min = tmp;
+
+			}
+
+		}
+
+	}
+
+	return min;
+}
+
+
