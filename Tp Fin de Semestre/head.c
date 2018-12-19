@@ -231,7 +231,7 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	{
 
 		printf("Entre 1 et 6 stp ^-^'\n"); // ¯\_(ツ)_/¯
-		Play(Plateau, player, Score);
+		Play(Plateau, player, Score, mode);
 
 	}
 	
@@ -253,7 +253,7 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	{
 
 		printf("Une case non vide tu dois prendre !\n"); // ¯\_(ツ)_/¯
-		Play(Plateau, player, Score);
+		Play(Plateau, player, Score, mode);
 
 	}
 
@@ -280,5 +280,5 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	RecupCailloux(player, Plateau, ActualCase, Score);
 	AffichPlateau(Plateau, Score);
 
-	Play(Plateau, 1 - player, Score);
+	Play(Plateau, 1 - player, Score, mode);
 }
