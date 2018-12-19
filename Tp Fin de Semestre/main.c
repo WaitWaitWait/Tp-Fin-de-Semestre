@@ -10,7 +10,7 @@
 #include <Windows.h>
 #include "head.h"
 #include "_SDL.h"
-#include "_SDL.h"
+#include "SDL.h"
 
 
 int main()

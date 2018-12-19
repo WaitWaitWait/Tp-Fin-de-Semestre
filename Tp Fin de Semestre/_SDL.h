@@ -3,3 +3,5 @@
 //	     		_SDL.h				  //
 //	By Valentin Monnot / Paul Marret  //
 ////////////////////////////////////////
+
+#include "SDL.h";
