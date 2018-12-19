@@ -12,7 +12,6 @@
 #include "_SDL.h"
 #include "SDL.h"
 
-
 int main()
 {
 	int mode = 0;
