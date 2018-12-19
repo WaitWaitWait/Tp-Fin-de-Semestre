@@ -1,24 +1,41 @@
+////////////////////////////////////////
+//		Project Awalé Tp Fin S1		  //
+//	     		main.c				  //
+//	By Valentin Monnot / Paul Marret  //
+////////////////////////////////////////
+
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <stdio.h>
 #include <Windows.h>
 #include "head.h"
-#include "IA.h"
-
+#include "_SDL.h"
+#include "SDL.h"
 
 
 int main()
 {
-	int StartPlayer = rand() % 2;
-	int Score[2] = { 0,0 };
-	hole Plateau[12];
+	int mode = 0;
 
-	hole * p_Plateau = NULL;
+	while (mode < 1 || mode > 2)
+	{
+
+		printf("Option de lancement :\n1 - Mode Graphique\n2 - Mode Console\n? : ");
+		scanf("%d", &mode);
+
+	}
+
+	int StartPlayer = 0; // Choix du joueur qui commence
+	int Score[2] = { 0,0 }; // Tableau des scores
+	hole Plateau[12]; //Plateau de jeu (Tableau de cases)
+
+	hole * p_Plateau = NULL; 
 	int * p_Score = NULL;
 
 	p_Plateau = Plateau;
 	p_Score = Score;
 
-	if (!p_Plateau || !p_Score)
+	if (!p_Plateau || !p_Score) // Sécuriter init pointeur
 	{
 
 		printf("Erreur d'initialisation Pointeur");
@@ -27,13 +44,21 @@ int main()
 	}
 
 	InitPlateau(p_Plateau);
-	AffichPlateau(p_Plateau,p_Score);
-	
-	
 
-	Play(p_Plateau, StartPlayer, p_Score);
+	if (mode == 1)
+	{
 
-	Arbre A = {'A' , cons(&B, cons(C&))}
+
+	}
+
+	else
+	{
+
+		AffichPlateau(p_Plateau, p_Score);
+
+	}
+
+	Play(p_Plateau, StartPlayer, p_Score, mode);
 
 	system("PAUSE");
 
