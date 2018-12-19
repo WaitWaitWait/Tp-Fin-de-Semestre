@@ -8,9 +8,9 @@
 typedef struct TreeNode_s
 {
 
-	int joueur1;
-	int joueur2;
-	TreeNode * child[6];
+	int gain;
+	int injouable; //si = 1 pas d enfant
+	struct TreeNode * child[6];
 
 }TreeNode;
 
