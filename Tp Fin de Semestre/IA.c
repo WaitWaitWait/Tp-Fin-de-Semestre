@@ -4,7 +4,17 @@
 void GenererCoups(hole * Plateau, int player, int * Score, TreeNode * Abr)
 {
 	
-	hole TempPlateau[12] = Plateau;
+	hole TempPlateau[12];
+	
+	int a;
+
+	for (a = 0; a < 12; a++)
+	{
+
+		TempPlateau[a] = Plateau[a];
+
+	}
+
 	hole * p_TempPlateau = NULL;	
 	p_TempPlateau = TempPlateau; 
 
@@ -89,4 +99,65 @@ void GenererCoups(hole * Plateau, int player, int * Score, TreeNode * Abr)
 
 
 
+}
+
+TreeNode * NewTree(TreeNode * Tree, int Depth, int NumCase)
+{
+	if (!Tree)
+	{
+
+		Tree = (TreeNode *)calloc(1 ,sizeof(TreeNode));
+		Tree->gain = 0;
+		Tree->NumCase = NumCase;
+		Tree->injouable = 0;
+
+	}
+	int a, b;
+
+	if (Depth > 0)
+	{
+		for (a = 0; a < 6; a++)
+		{
+
+			NewTree(Tree->child[a], Depth - 1, a + 1);
+
+		}
+	}
+
+	else
+	{
+
+		return Tree;
+
+	}
+}
+
+int IA(hole * Plateau, int * Score, int player, int IALevel)
+{
+	int BestChoixEver_________Maybe ;
+
+	TreeNode * IATree = NULL;
+
+	IATree = NewTree(NULL, IALevel, 0);
+
+	BestChoixEver_________Maybe = IAChoix(Plateau, IATree, Score, player, IALevel);
+
+	return BestChoixEver_________Maybe;
+
+}
+
+int IAChoix(hole * Plateau, TreeNode * Node, int * Score, int player, int Level)
+{
+	int BestChoix, jaaj;
+
+	if (Level == 1)																		// Easy mode, made the easiest way ?
+	{
+
+		for (jaaj = 0; jaaj < 6; jaaj++)
+		{
+
+
+		}
+	}
+	return BestChoix;
 }
