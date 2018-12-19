@@ -19,6 +19,6 @@ TreeNode * NewTree(TreeNode * Tree, int Depth, int NumCase);
 
 int IA(hole * Plateau, int * Score, int player, int IALevel);
 
-int IAChoix(hole * Plateau, int choix, TreeNode * Node, int * Score, int player, int Level);
+int IAChoix(hole * Plateau, TreeNode * Node, int * Score, int player, int Level);
 
 #endif
