@@ -14,10 +14,4 @@ typedef struct TreeNode_s
 
 }TreeNode;
 
-
-int IaMin(int);
-
-int IaMax(int);
-
-void IaQuiJoue();
 #endif;

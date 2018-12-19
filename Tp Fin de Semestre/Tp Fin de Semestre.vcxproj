@@ -118,10 +118,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="head.c" />
+    <ClCompile Include="IA.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="_SDL.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.h" />
+    <ClInclude Include="IA.h" />
+    <ClInclude Include="_SDL.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\SDL2-2.0.9\lib\x64\SDL2.lib" />
