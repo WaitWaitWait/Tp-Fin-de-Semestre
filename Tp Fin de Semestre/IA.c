@@ -112,20 +112,24 @@ TreeNode * NewTree(TreeNode * Tree, int Depth, int NumCase)
 		Tree->injouable = 0;
 
 	}
-	int a;
+	int a, b;
 
 	if (Depth > 0)
 	{
 		for (a = 0; a < 6; a++)
 		{
 
-			Tree->child[a] = NewTree(NULL, Depth - 1, a + 1);
+			NewTree(Tree->child[a], Depth - 1, a + 1);
 
 		}
 	}
 
-	return Tree;
+	else
+	{
 
+		return Tree;
+
+	}
 }
 
 int IA(hole * Plateau, int * Score, int player, int IALevel)
@@ -144,74 +148,16 @@ int IA(hole * Plateau, int * Score, int player, int IALevel)
 
 int IAChoix(hole * Plateau, TreeNode * Node, int * Score, int player, int Level)
 {
-	int BestChoix, jaaj, ja , choix;
+	int BestChoix, jaaj;
 
-	hole tmpPlateau[12];
-	hole * p_tmpPlateau = NULL;
-	p_tmpPlateau = tmpPlateau;
-
-	int tmpScore[2];
-	int * p_tmpScore = NULL;
-	p_tmpScore = tmpScore;
-
-	TreeNode * p_NodeChild = NULL;
-
-	if (!p_tmpPlateau || !p_tmpScore)
+	if (Level == 1)																		// Easy mode, made the easiest way ?
 	{
-
-		printf("Erreur d'initialisation pointeur\n");
-		system("pause");
-		EXIT_FAILURE;
-
-	}
-	
-
-	if (Level == 1)																		// Mode débutant, sans min max et avec rand
-	{
-		
-		int ActualCase,NbCailloux;
-		int ScoreTab[6];
 
 		for (jaaj = 0; jaaj < 6; jaaj++)
 		{
 
-			for (ja = 0; ja < 12; ja++)
-			{
-
-				tmpPlateau[jaaj] = Plateau[jaaj];
-
-			}
-
-			for (ja = 0; ja < 2; ja++)
-			{
-
-				tmpScore[jaaj] = Score[jaaj];
-
-			}
-
-			p_NodeChild = Node->child[jaaj];
-			choix = p_NodeChild->NumCase;
-			ActualCase = choix;
-			NbCailloux = tmpPlateau[choix].NbCailloux;
-			tmpPlateau[choix].NbCailloux = 0;
-			tmpPlateau[choix].start = 1;
-
-			PlaceCailloux(p_NodeChild->NumCase, p_tmpPlateau, choix , NbCailloux);
-
-			for (ja = 0; ja < NbCailloux; ja++)
-			{
-
-				ActualCase = Plateau[ActualCase].next;
-
-			}
-
-			RecupCailloux(0, Plateau, ActualCase, p_tmpScore);
-			ScoreTab[jaaj] = tmpScore[0] - Score[0];
 
 		}
-
-
 	}
 	return BestChoix;
-
 }
