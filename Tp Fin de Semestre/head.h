@@ -29,6 +29,6 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score);
 
 int Affamer(int player, hole * Plateau);
 
-void Play(hole * Plateau, int player, int * Score, int mode);
+void Play(hole * Plateau, int player, int mode, int * Score);
 
 #endif

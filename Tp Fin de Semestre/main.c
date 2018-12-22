@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <Windows.h>
 #include "head.h"
-#include "_SDL.h"
-#include "SDL.h"
+//#include "_SDL.h"
+//#include "SDL.h"
 
 int main()
 {
@@ -25,8 +25,8 @@ int main()
 	}
 
 	int StartPlayer = 0; // Choix du joueur qui commence
-	int Score[2] = { 0,0 }; // Tableau des scores
 	hole Plateau[12]; //Plateau de jeu (Tableau de cases)
+	int Score[2] = { 0,0 };
 
 	hole * p_Plateau = NULL; 
 	int * p_Score = NULL;
@@ -57,7 +57,7 @@ int main()
 
 	}
 
-	Play(p_Plateau, StartPlayer, p_Score, mode);
+	Play(p_Plateau, StartPlayer, mode,p_Score);
 
 	system("PAUSE");
 

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "head.h"
+#include "IA.h"
 
 //Fonction d'initialisation Plateau
 void InitPlateau(hole * Plateau)
@@ -71,7 +72,7 @@ void InitPlateau(hole * Plateau)
 } 
 
 //Fonction d'affichage plateau (mode console)
-void AffichPlateau(hole * Plateau, int * Score)
+void AffichPlateau(hole * Plateau,int * Score)
 {
 
 	int a;
@@ -101,7 +102,7 @@ void AffichPlateau(hole * Plateau, int * Score)
 }
 
 //Fonction de ramassage des graines
-void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)				//////////////////////////////////////////////////////////////////////////////////////////////
+void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)			              	//////////////////////////////////////////////////////////////////////////////////////////////
 {																						//
 	int tmp, famine;																	//
 																						//
@@ -110,7 +111,7 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)				/
 		if (Plateau[ActualCase].NbCailloux > 1 && Plateau[ActualCase].NbCailloux < 4)	//	On verifie que la case contient 2 ou 3 graines
 		{																				//
 																						//
-			Score[player] += Plateau[ActualCase].NbCailloux;							//	Si oui, on récupère les graines dans le tableau des scores du joueur correspondant
+			Score[player] += Plateau[ActualCase].NbCailloux;					//	Si oui, on récupère les graines dans le tableau des scores du joueur correspondant
 			tmp = Plateau[ActualCase].NbCailloux;										//	On stocke l'ancienne valeur avant de vider la case
 			Plateau[ActualCase].NbCailloux = 0;											//	On vide la case 
 																						//
@@ -120,7 +121,7 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)				/
 			{																			//
 																						//
 				Plateau[ActualCase].NbCailloux = tmp;									//	On rend les graines à l'adversaire
-				Score[player] -= tmp;													//	On les retire de notre score
+				Score[player] -= tmp;											//	On les retire de notre score
 																						//
 			}																			//
 																						//
@@ -128,7 +129,7 @@ void RecupCailloux(int player, hole * Plateau, int ActualCase, int * Score)				/
 			{																			//
 																						//
 				ActualCase = Plateau[ActualCase].previous;								//	On remonte d'une case
-				RecupCailloux(player, Plateau, ActualCase, Score);						//	Et l’on vérifie si l’on peut récupérer les graines de la case d'avant.
+				RecupCailloux(player, Plateau, ActualCase,Score);						        //	Et l’on vérifie si l’on peut récupérer les graines de la case d'avant.
 																						//
 			}																			//
 		}																				//
@@ -215,7 +216,7 @@ void PlaceCailloux(int CaseDepart, hole * Plateau, int choix, int  NbCailloux)
 	return;
 }
 
-void Play(hole * Plateau, int player, int * Score, int mode)
+void Play(hole * Plateau, int player, int mode, int * Score)
 {
 
 	int choix = 0;
@@ -231,14 +232,14 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	{
 
 		printf("Entre 1 et 6 stp ^-^'\n"); // ¯\_(ツ)_/¯
-		Play(Plateau, player, Score, mode);
+		Play(Plateau, player, mode,Score);
 
 	}
 	
 	if (player == 0)
 	{
 
-		choix--;
+		choix = IA(Plateau,1);
 
 	}
 
@@ -253,7 +254,7 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	{
 
 		printf("Une case non vide tu dois prendre !\n"); // ¯\_(ツ)_/¯
-		Play(Plateau, player, Score, mode);
+		Play(Plateau, player, mode, Score);
 
 	}
 
@@ -266,7 +267,7 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 	choix = Plateau[choix].next;
 
 	PlaceCailloux(CaseDepart, Plateau, choix, NbCailloux);
-	AffichPlateau(Plateau, Score);
+	AffichPlateau(Plateau,Score);
 
 	system("PAUSE");
 
@@ -277,8 +278,8 @@ void Play(hole * Plateau, int player, int * Score, int mode)
 
 	}
 
-	RecupCailloux(player, Plateau, ActualCase, Score);
-	AffichPlateau(Plateau, Score);
+	RecupCailloux(player, Plateau, ActualCase,Score);
+	AffichPlateau(Plateau,Score);
 
-	Play(Plateau, 1 - player, Score, mode);
+	Play(Plateau, 1 - player, mode,Score);
 }
